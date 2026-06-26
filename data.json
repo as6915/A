@@ -1,1 +1,18 @@
-[{"name":"ahmed","points":10},{"name":"mohamed","points":5},{"name":"admin","points":50},{"name":"test","points":3}]
+[
+  {
+    "name": "ahmed",
+    "points": 10
+  },
+  {
+    "name": "mohamed",
+    "points": 5
+  },
+  {
+    "name": "admin",
+    "points": 50
+  },
+  {
+    "name": "test",
+    "points": 3
+  }
+]
