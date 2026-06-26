@@ -1,18 +1,9 @@
-[
-  {
-    "name": "ahmed",
-    "points": 10
-  },
-  {
-    "name": "mohamed",
-    "points": 5
-  },
-  {
-    "name": "admin",
-    "points": 50
-  },
-  {
-    "name": "test",
-    "points": 3
+{
+  "users": {
+    "01028085788": {
+      "points": 50,
+      "expire": "2026-07-26T20:47:27.513718",
+      "name": "Alakreb"
+    }
   }
-]
+}
