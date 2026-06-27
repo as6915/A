@@ -44,12 +44,20 @@
       },
       "bodyType": "urlencoded",
       "body": "grant_type=password&client_secret=b86e30a8-ae29-467a-a71f-65c73f2ff5e3&client_id=cash-app",
-      "extract": {
-        "from": "json",
-        "key": "access_token",
-        "deepSearch": true
-      },
-      "saveAs": "access_token",
+      "extract": [
+        {
+          "from": "json",
+          "key": "access_token",
+          "deepSearch": true,
+          "saveAs": "access_token"
+        },
+        {
+          "from": "json",
+          "key": "token_type",
+          "deepSearch": true,
+          "saveAs": "token_type"
+        }
+      ],
       "error": "فشل الحصول على التوكن"
     },
     {
@@ -65,7 +73,7 @@
         "useCase": "CashFakkaAndMared",
         "api-version": "v2",
         "msisdn": "{sender}",
-        "Authorization": "Bearer {access_token}",
+        "Authorization": "{token_type} {access_token}",
         "x-agent-operatingsystem": "13",
         "clientId": "AnaVodafoneAndroid",
         "Accept-Language": "ar",
