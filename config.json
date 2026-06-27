@@ -2,7 +2,7 @@
   "steps": [
     {
       "method": "GET",
-      "url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
+      "url": "https://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
       "injectHeaders": {
         "User-Agent": "okhttp/4.11.0",
         "Connection": "Keep-Alive",
@@ -15,6 +15,7 @@
         "x-agent-build": "1050",
         "digitalId": "24S0M31T0I9RK"
       },
+      "extractFrom": "redirectUrl",
       "extractKey": "seamlessToken",
       "errorKey": "فشل تسجيل الدخول تأكد إن الشبكة فودافون"
     },
@@ -30,7 +31,6 @@
       "injectHeaders": {
         "Accept": "application/json, text/plain, */*",
         "silentLogin": "true",
-        "seamlessToken": "{seamlessToken}",
         "firstTimeLogin": "true"
       },
       "extractKey": "access_token",
