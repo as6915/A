@@ -20,7 +20,7 @@
         "key": "seamlessToken"
       },
       "saveAs": "seamlessToken",
-      "error": "فشل تسجيل الدخول — تأكد إن الشبكة فودافون",
+      "error": "فشل تسجيل الدخول",
       "httpSuccess": [200]
     },
     {
@@ -104,12 +104,12 @@
       },
       "extract": {
         "from": "json",
-        "key": "state"
+        "key": "orderId"
       },
-      "saveAs": "orderState",
+      "saveAs": "orderId",
       "error": "reason",
       "httpSuccess": [200],
-      "success": "state == 'Completed'"
+      "success": "state == 'Completed' && orderId != null && orderId != ''"
     }
   ]
 }
