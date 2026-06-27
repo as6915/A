@@ -44,47 +44,13 @@
       },
       "bodyType": "urlencoded",
       "body": "grant_type=password&client_secret=b86e30a8-ae29-467a-a71f-65c73f2ff5e3&client_id=cash-app",
-      "extract": [
-        {
-          "from": "json",
-          "key": "access_token",
-          "deepSearch": true,
-          "saveAs": "access_token"
-        },
-        {
-          "from": "json",
-          "key": "refresh_token",
-          "deepSearch": true,
-          "saveAs": "refresh_token"
-        }
-      ],
-      "error": "فشل الحصول على التوكن"
-    },
-    {
-      "method": "POST",
-      "url": "https://mobile.vodafone.com.eg/auth/realms/vf-realm/protocol/openid-connect/token",
-      "headers": {
-        "User-Agent": "okhttp/4.11.0",
-        "Accept": "application/json, text/plain, */*",
-        "Accept-Encoding": "gzip",
-        "x-agent-operatingsystem": "13",
-        "clientId": "AnaVodafoneAndroid",
-        "Accept-Language": "ar",
-        "x-agent-device": "NativeApp",
-        "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "DynamicApp",
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      "bodyType": "urlencoded",
-      "body": "grant_type=refresh_token&client_secret=b86e30a8-ae29-467a-a71f-65c73f2ff5e3&client_id=cash-app&refresh_token={refresh_token}",
       "extract": {
         "from": "json",
         "key": "access_token",
         "deepSearch": true
       },
       "saveAs": "access_token",
-      "error": "فشل تجديد التوكن"
+      "error": "فشل الحصول على التوكن"
     },
     {
       "method": "POST",
