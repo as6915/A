@@ -74,12 +74,32 @@
         "x-agent-build": "1050",
         "digitalId": "DynamicApp"
       },
-      "bodyTemplate": "{\"channel\":{\"name\":\"MobileApp\"},\"orderItem\":[{\"action\":\"insert\",\"id\":\"PRODUCT_ID\",\"product\":{\"characteristic\":[{\"name\":\"PaymentMethod\",\"value\":\"VFCash\"},{\"name\":\"USE_EMONEY\",\"value\":\"False\"},{\"name\":\"MerchantCode\",\"value\":\"81841829\"}],\"id\":\"PRODUCT_ID\",\"relatedParty\":[{\"id\":\"SENDER_WITHOUT_ZERO\",\"name\":\"MSISDN\",\"role\":\"Subscriber\"},{\"id\":\"RECEIVER\",\"name\":\"Receiver\",\"role\":\"Receiver\"}]},\"@type\":\"PRODUCT_ID\",\"eCode\":0}],\"relatedParty\":[{\"id\":\"PIN\",\"name\":\"pin\",\"role\":\"Requestor\"}],\"@type\":\"CashFakkaAndMared\"}",
-      "placeholders": {
-        "PRODUCT_ID": "{productId}",
-        "SENDER_WITHOUT_ZERO": "{sender_no_zero}",
-        "RECEIVER": "{receiver}",
-        "PIN": "{pin}"
+      "body": {
+        "channel": {"name": "MobileApp"},
+        "orderItem": [
+          {
+            "action": "insert",
+            "id": "{productId}",
+            "product": {
+              "characteristic": [
+                {"name": "PaymentMethod", "value": "VFCash"},
+                {"name": "USE_EMONEY", "value": "False"},
+                {"name": "MerchantCode", "value": "81841829"}
+              ],
+              "id": "{productId}",
+              "relatedParty": [
+                {"id": "{sender_no_zero}", "name": "MSISDN", "role": "Subscriber"},
+                {"id": "{receiver}", "name": "Receiver", "role": "Receiver"}
+              ]
+            },
+            "@type": "{productId}",
+            "eCode": 0
+          }
+        ],
+        "relatedParty": [
+          {"id": "{pin}", "name": "pin", "role": "Requestor"}
+        ],
+        "@type": "CashFakkaAndMared"
       },
       "extract": {
         "from": "json",
