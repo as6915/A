@@ -82,8 +82,7 @@
         "key": "access_token"
       },
       "saveAs": "access_token",
-      "error": "فشل تجديد التوكن",
-      "optional": true
+      "error": "فشل تجديد التوكن"
     },
     {
       "method": "POST",
