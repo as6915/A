@@ -1,4 +1,7 @@
 {
+  "verbose": true,
+  "logRequest": true,
+  "logResponse": true,
   "steps": [
     {
       "method": "GET",
@@ -58,7 +61,8 @@
           "saveAs": "token_type"
         }
       ],
-      "error": "فشل الحصول على التوكن"
+      "error": "فشل الحصول على التوكن",
+      "logFullResponse": true
     },
     {
       "method": "POST",
@@ -96,7 +100,9 @@
       },
       "saveAs": "orderState",
       "error": "reason",
-      "successCondition": "state == 'Completed' || complete == true"
+      "successCondition": "state == 'Completed' || complete == true",
+      "logFullRequest": true,
+      "logFullResponse": true
     }
   ]
 }
