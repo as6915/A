@@ -20,7 +20,8 @@
         "key": "Location"
       },
       "saveAs": "seamlessToken",
-      "error": "فشل تسجيل الدخول — تأكد إن الشبكة فودافون"
+      "error": "فشل تسجيل الدخول",
+      "httpSuccess": [200, 302]
     },
     {
       "method": "POST",
@@ -50,7 +51,8 @@
         "key": "access_token"
       },
       "saveAs": "access_token",
-      "error": "فشل الحصول على التوكن"
+      "error": "فشل الحصول على التوكن",
+      "httpSuccess": [200]
     },
     {
       "method": "POST",
@@ -105,7 +107,8 @@
       },
       "saveAs": "orderId",
       "error": "reason",
-      "success": "state == 'Completed'"
+      "httpSuccess": [200],
+      "success": "state == 'Completed' && orderId != null && orderId != ''"
     },
     {
       "method": "POST",
@@ -140,7 +143,8 @@
       },
       "saveAs": "transactionId",
       "error": "فشل تنفيذ الشحن",
-      "success": "status == 'SUCCESS'"
+      "httpSuccess": [200],
+      "success": "status == 'SUCCESS' && transactionId != null && transactionId != ''"
     },
     {
       "method": "GET",
@@ -169,6 +173,7 @@
       },
       "saveAs": "finalStatus",
       "error": "فشل التحقق من الحالة",
+      "httpSuccess": [200],
       "success": "finalStatus == 'COMPLETED' || finalStatus == 'SUCCESS'"
     }
   ]
