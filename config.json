@@ -20,7 +20,9 @@
         "key": "seamlessToken"
       },
       "saveAs": "seamlessToken",
-      "error": "فشل تسجيل الدخول"
+      "error": "فشل تسجيل الدخول",
+      "logFullResponse": true,
+      "logHeaders": true
     },
     {
       "method": "POST",
@@ -48,7 +50,9 @@
         "key": "access_token"
       },
       "saveAs": "access_token",
-      "error": "فشل الحصول على التوكن"
+      "error": "فشل الحصول على التوكن",
+      "logFullResponse": true,
+      "logHeaders": true
     },
     {
       "method": "POST",
@@ -105,7 +109,9 @@
       },
       "saveAs": "orderState",
       "error": "reason",
-      "successCondition": "state == 'Completed' || complete == true"
+      "successCondition": "state == 'Completed' || complete == true",
+      "logFullResponse": true,
+      "logHeaders": true
     }
   ]
 }
