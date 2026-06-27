@@ -2,9 +2,9 @@
   "steps": [
     {
       "method": "GET",
-      "url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
+      "url": "https://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
       "injectHeaders": {
-        "User-Agent": "okhttp/4.11.0",
+        "User-Agent": "Mozilla/5.0 (Linux; Android 13; CPH2235) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
         "Connection": "Keep-Alive",
         "Accept-Encoding": "gzip",
         "x-agent-operatingsystem": "13",
@@ -12,8 +12,7 @@
         "Accept-Language": "ar",
         "x-agent-device": "OPPO CPH2235",
         "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "24S0M31T0I9RK"
+        "x-agent-build": "1050"
       },
       "extractKey": "seamlessToken",
       "errorKey": "فشل تسجيل الدخول تأكد إن الشبكة فودافون"
@@ -41,27 +40,52 @@
       "url": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
       "bodyType": "json",
       "bodyTemplate": {
-        "channel": {"name": "MobileApp"},
-        "orderItem": [{
-          "action": "insert",
-          "id": "{productId}",
-          "product": {
-            "characteristic": [
-              {"name": "PaymentMethod", "value": "VFCash"},
-              {"name": "USE_EMONEY", "value": "False"},
-              {"name": "MerchantCode", "value": "81841829"}
-            ],
+        "channel": {
+          "name": "MobileApp"
+        },
+        "orderItem": [
+          {
+            "action": "insert",
             "id": "{productId}",
-            "relatedParty": [
-              {"id": "{sender_no_zero}", "name": "MSISDN", "role": "Subscriber"},
-              {"id": "{receiver}", "name": "Receiver", "role": "Receiver"}
-            ]
-          },
-          "@type": "{productId}",
-          "eCode": 0
-        }],
+            "product": {
+              "characteristic": [
+                {
+                  "name": "PaymentMethod",
+                  "value": "VFCash"
+                },
+                {
+                  "name": "USE_EMONEY",
+                  "value": "False"
+                },
+                {
+                  "name": "MerchantCode",
+                  "value": "81841829"
+                }
+              ],
+              "id": "{productId}",
+              "relatedParty": [
+                {
+                  "id": "{sender_no_zero}",
+                  "name": "MSISDN",
+                  "role": "Subscriber"
+                },
+                {
+                  "id": "{receiver}",
+                  "name": "Receiver",
+                  "role": "Receiver"
+                }
+              ]
+            },
+            "@type": "{productId}",
+            "eCode": 0
+          }
+        ],
         "relatedParty": [
-          {"id": "{pin}", "name": "pin", "role": "Requestor"}
+          {
+            "id": "{pin}",
+            "name": "pin",
+            "role": "Requestor"
+          }
         ],
         "@type": "CashFakkaAndMared"
       },
