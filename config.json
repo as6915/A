@@ -15,7 +15,7 @@
             ],
             "id": "{productId}",
             "relatedParty": [
-              {"id": "{sender_raw}", "name": "MSISDN", "role": "Subscriber"},
+              {"id": "{sender}", "name": "MSISDN", "role": "Subscriber"},
               {"id": "{receiver}", "name": "Receiver", "role": "Receiver"}
             ]
           },
