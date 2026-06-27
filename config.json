@@ -2,9 +2,9 @@
   "steps": [
     {
       "method": "GET",
-      "url": "https://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
+      "url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
       "injectHeaders": {
-        "User-Agent": "Dalvik/2.1.0",
+        "User-Agent": "okhttp/4.11.0",
         "Connection": "Keep-Alive",
         "Accept-Encoding": "gzip",
         "x-agent-operatingsystem": "13",
@@ -41,52 +41,27 @@
       "url": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
       "bodyType": "json",
       "bodyTemplate": {
-        "channel": {
-          "name": "MobileApp"
-        },
-        "orderItem": [
-          {
-            "action": "insert",
+        "channel": {"name": "MobileApp"},
+        "orderItem": [{
+          "action": "insert",
+          "id": "{productId}",
+          "product": {
+            "characteristic": [
+              {"name": "PaymentMethod", "value": "VFCash"},
+              {"name": "USE_EMONEY", "value": "False"},
+              {"name": "MerchantCode", "value": "81841829"}
+            ],
             "id": "{productId}",
-            "product": {
-              "characteristic": [
-                {
-                  "name": "PaymentMethod",
-                  "value": "VFCash"
-                },
-                {
-                  "name": "USE_EMONEY",
-                  "value": "False"
-                },
-                {
-                  "name": "MerchantCode",
-                  "value": "81841829"
-                }
-              ],
-              "id": "{productId}",
-              "relatedParty": [
-                {
-                  "id": "{sender}",
-                  "name": "MSISDN",
-                  "role": "Subscriber"
-                },
-                {
-                  "id": "{receiver}",
-                  "name": "Receiver",
-                  "role": "Receiver"
-                }
-              ]
-            },
-            "@type": "{productId}",
-            "eCode": 0
-          }
-        ],
+            "relatedParty": [
+              {"id": "{sender_no_zero}", "name": "MSISDN", "role": "Subscriber"},
+              {"id": "{receiver}", "name": "Receiver", "role": "Receiver"}
+            ]
+          },
+          "@type": "{productId}",
+          "eCode": 0
+        }],
         "relatedParty": [
-          {
-            "id": "{pin}",
-            "name": "pin",
-            "role": "Requestor"
-          }
+          {"id": "{pin}", "name": "pin", "role": "Requestor"}
         ],
         "@type": "CashFakkaAndMared"
       },
