@@ -3,6 +3,18 @@
     {
       "method": "GET",
       "url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
+      "injectHeaders": {
+        "User-Agent": "okhttp/4.11.0",
+        "Connection": "Keep-Alive",
+        "Accept-Encoding": "gzip",
+        "x-agent-operatingsystem": "13",
+        "clientId": "AnaVodafoneAndroid",
+        "Accept-Language": "ar",
+        "x-agent-device": "OPPO CPH2235",
+        "x-agent-version": "2024.7.2.1",
+        "x-agent-build": "1050",
+        "digitalId": "24S0M31T0I9RK"
+      },
       "extractKey": "seamlessToken",
       "errorKey": "فشل تسجيل الدخول تأكد إن الشبكة فودافون"
     },
@@ -16,7 +28,9 @@
         "client_id": "cash-app"
       },
       "injectHeaders": {
+        "Accept": "application/json, text/plain, */*",
         "silentLogin": "true",
+        "seamlessToken": "{seamlessToken}",
         "firstTimeLogin": "true"
       },
       "extractKey": "access_token",
@@ -25,15 +39,6 @@
     {
       "method": "POST",
       "url": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
-      "injectHeaders": {
-        "Authorization": "Bearer {access_token}",
-        "msisdn": "{sender}",
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "api-host": "ProductOrderingManagement",
-        "useCase": "CashFakkaAndMared",
-        "api-version": "v2"
-      },
       "bodyType": "json",
       "bodyTemplate": {
         "channel": {"name": "MobileApp"},
@@ -59,6 +64,15 @@
           {"id": "{pin}", "name": "pin", "role": "Requestor"}
         ],
         "@type": "CashFakkaAndMared"
+      },
+      "injectHeaders": {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "api-host": "ProductOrderingManagement",
+        "useCase": "CashFakkaAndMared",
+        "api-version": "v2",
+        "msisdn": "{sender}",
+        "Authorization": "Bearer {access_token}"
       },
       "successCondition": "state == 'Completed' || complete == true",
       "errorKey": "reason"
