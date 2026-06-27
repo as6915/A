@@ -1,6 +1,24 @@
 {
   "steps": [
     {
+      "method": "GET",
+      "url": "https://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
+      "injectHeaders": {
+        "User-Agent": "Dalvik/2.1.0",
+        "Connection": "Keep-Alive",
+        "Accept-Encoding": "gzip",
+        "x-agent-operatingsystem": "13",
+        "clientId": "AnaVodafoneAndroid",
+        "Accept-Language": "ar",
+        "x-agent-device": "OPPO CPH2235",
+        "x-agent-version": "2024.7.2.1",
+        "x-agent-build": "1050",
+        "digitalId": "24S0M31T0I9RK"
+      },
+      "extractKey": "seamlessToken",
+      "errorKey": "فشل تسجيل الدخول تأكد إن الشبكة فودافون"
+    },
+    {
       "method": "POST",
       "url": "https://mobile.vodafone.com.eg/auth/realms/vf-realm/protocol/openid-connect/token",
       "bodyType": "urlencoded",
@@ -10,19 +28,13 @@
         "client_id": "cash-app"
       },
       "injectHeaders": {
-        "User-Agent": "Dalvik/2.1.0",
         "Accept": "application/json, text/plain, */*",
         "silentLogin": "true",
-        "firstTimeLogin": "true",
-        "x-agent-operatingsystem": "13",
-        "clientId": "AnaVodafoneAndroid",
-        "x-agent-device": "OPPO CPH2235",
-        "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "24S0M31T0I9RK"
+        "seamlessToken": "{seamlessToken}",
+        "firstTimeLogin": "true"
       },
       "extractKey": "access_token",
-      "errorKey": "error_description"
+      "errorKey": "فشل الحصول على التوكن"
     },
     {
       "method": "POST",
