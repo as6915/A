@@ -17,8 +17,7 @@
       },
       "extract": {
         "from": "json",
-        "key": "seamlessToken",
-        "deepSearch": true
+        "key": "seamlessToken"
       },
       "saveAs": "seamlessToken",
       "error": "فشل تسجيل الدخول"
@@ -46,8 +45,7 @@
       "body": "grant_type=password&client_secret=b86e30a8-ae29-467a-a71f-65c73f2ff5e3&client_id=cash-app",
       "extract": {
         "from": "json",
-        "key": "access_token",
-        "deepSearch": true
+        "key": "access_token"
       },
       "saveAs": "access_token",
       "error": "فشل الحصول على التوكن"
@@ -103,8 +101,7 @@
       },
       "extract": {
         "from": "json",
-        "key": "state",
-        "deepSearch": true
+        "key": "state"
       },
       "saveAs": "orderState",
       "error": "reason",
