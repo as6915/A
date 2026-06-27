@@ -1,6 +1,7 @@
 {
   "steps": [
     {
+      "name": "الحصول على seamlessToken",
       "method": "GET",
       "url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
       "headers": {
@@ -21,10 +22,11 @@
         "deepSearch": true
       },
       "saveAs": "seamlessToken",
-      "error": "فشل تسجيل الدخول",
+      "error": "فشل تسجيل الدخول - تأكد من شبكة فودافون",
       "httpSuccess": [200]
     },
     {
+      "name": "الحصول على access_token",
       "method": "POST",
       "url": "https://mobile.vodafone.com.eg/auth/realms/vf-realm/protocol/openid-connect/token",
       "headers": {
@@ -56,6 +58,7 @@
       "httpSuccess": [200]
     },
     {
+      "name": "إرسال طلب الشحن",
       "method": "POST",
       "url": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
       "headers": {
@@ -109,6 +112,38 @@
       "error": "reason",
       "httpSuccess": [200],
       "successCondition": "(state == 'Completed' || complete == true) && orderId != null && orderId != '' && orderId != 'null'"
+    },
+    {
+      "name": "التحقق من حالة الطلب (تأكيد نهائي)",
+      "method": "GET",
+      "url": "https://mobile.vodafone.com.eg/services/dxl/pom/orderStatus/{orderId}",
+      "headers": {
+        "User-Agent": "okhttp/4.11.0",
+        "Connection": "Keep-Alive",
+        "Accept-Encoding": "gzip",
+        "x-agent-operatingsystem": "13",
+        "clientId": "AnaVodafoneAndroid",
+        "Accept-Language": "ar",
+        "x-agent-device": "NativeApp",
+        "x-agent-version": "2024.7.2.1",
+        "x-agent-build": "1050",
+        "digitalId": "DynamicApp",
+        "Accept": "application/json",
+        "api-host": "ProductOrderingManagement",
+        "useCase": "CashFakkaAndMared",
+        "api-version": "v2",
+        "msisdn": "{sender}",
+        "Authorization": "Bearer {access_token}"
+      },
+      "extract": {
+        "from": "json",
+        "key": "status",
+        "deepSearch": true
+      },
+      "saveAs": "finalStatus",
+      "error": "فشل التحقق من حالة الطلب",
+      "httpSuccess": [200],
+      "successCondition": "finalStatus == 'COMPLETED' || finalStatus == 'SUCCESS' || finalStatus == 'EXECUTED' || finalStatus == 'DONE' || finalStatus == 'CONFIRMED'"
     }
   ]
 }
