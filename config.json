@@ -73,12 +73,29 @@
         "digitalId": "DynamicApp"
       },
       "body": "{\"channel\":{\"name\":\"MobileApp\"},\"orderItem\":[{\"action\":\"insert\",\"id\":\"{productId}\",\"product\":{\"characteristic\":[{\"name\":\"PaymentMethod\",\"value\":\"VFCash\"},{\"name\":\"USE_EMONEY\",\"value\":\"False\"},{\"name\":\"MerchantCode\",\"value\":\"81841829\"}],\"id\":\"{productId}\",\"relatedParty\":[{\"id\":\"{sender_no_zero}\",\"name\":\"MSISDN\",\"role\":\"Subscriber\"},{\"id\":\"{receiver}\",\"name\":\"Receiver\",\"role\":\"Receiver\"}]},\"@type\":\"{productId}\",\"eCode\":0}],\"relatedParty\":[{\"id\":\"{pin}\",\"name\":\"pin\",\"role\":\"Requestor\"}],\"@type\":\"CashFakkaAndMared\"}",
-      "extract": {
-        "from": "json",
-        "key": "state"
-      },
-      "saveAs": "orderState",
-      "error": "reason",
+      "extract": [
+        {
+          "from": "json",
+          "key": "state",
+          "saveAs": "orderState"
+        },
+        {
+          "from": "json",
+          "key": "code",
+          "saveAs": "errorCode"
+        },
+        {
+          "from": "json",
+          "key": "reason",
+          "saveAs": "errorReason"
+        },
+        {
+          "from": "json",
+          "key": "message",
+          "saveAs": "errorMessage"
+        }
+      ],
+      "error": "errorMessage",
       "successCondition": "state == 'Completed' || complete == true"
     }
   ]
