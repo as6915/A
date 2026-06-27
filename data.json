@@ -1,1 +1,10 @@
-
+{
+  "users": {
+    "01028085788": {
+      "points": 50,
+      "admin": "Alakreb",
+      "name": "Alakreb"
+    }
+  },
+  "admins": {}
+}
