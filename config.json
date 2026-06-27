@@ -10,14 +10,15 @@
         "x-agent-operatingsystem": "13",
         "clientId": "AnaVodafoneAndroid",
         "Accept-Language": "ar",
-        "x-agent-device": "OPPO CPH2235",
+        "x-agent-device": "NativeApp",
         "x-agent-version": "2024.7.2.1",
         "x-agent-build": "1050",
-        "digitalId": "24S0M31T0I9RK"
+        "digitalId": "DynamicApp"
       },
       "extract": {
         "from": "json",
-        "key": "seamlessToken"
+        "key": "seamlessToken",
+        "deepSearch": true
       },
       "saveAs": "seamlessToken",
       "error": "فشل تسجيل الدخول",
@@ -28,28 +29,27 @@
       "url": "https://mobile.vodafone.com.eg/auth/realms/vf-realm/protocol/openid-connect/token",
       "headers": {
         "User-Agent": "okhttp/4.11.0",
-        "Accept": "application/json, text/plain, */*",
+        "Connection": "Keep-Alive",
         "Accept-Encoding": "gzip",
-        "silentLogin": "true",
-        "seamlessToken": "{seamlessToken}",
-        "firstTimeLogin": "true",
         "x-agent-operatingsystem": "13",
         "clientId": "AnaVodafoneAndroid",
         "Accept-Language": "ar",
-        "x-agent-device": "OPPO CPH2235",
+        "x-agent-device": "NativeApp",
         "x-agent-version": "2024.7.2.1",
         "x-agent-build": "1050",
-        "digitalId": "24S0M31T0I9RK"
+        "digitalId": "DynamicApp",
+        "Accept": "application/json, text/plain, */*",
+        "silentLogin": "true",
+        "seamlessToken": "{seamlessToken}",
+        "firstTimeLogin": "true",
+        "Content-Type": "application/x-www-form-urlencoded"
       },
       "bodyType": "urlencoded",
-      "body": {
-        "grant_type": "password",
-        "client_secret": "b86e30a8-ae29-467a-a71f-65c73f2ff5e3",
-        "client_id": "cash-app"
-      },
+      "body": "grant_type=password&client_secret=b86e30a8-ae29-467a-a71f-65c73f2ff5e3&client_id=cash-app",
       "extract": {
         "from": "json",
-        "key": "access_token"
+        "key": "access_token",
+        "deepSearch": true
       },
       "saveAs": "access_token",
       "error": "فشل الحصول على التوكن",
@@ -61,55 +61,38 @@
       "headers": {
         "User-Agent": "okhttp/4.11.0",
         "Connection": "Keep-Alive",
-        "Accept": "application/json",
         "Accept-Encoding": "gzip",
+        "x-agent-operatingsystem": "13",
+        "clientId": "AnaVodafoneAndroid",
+        "Accept-Language": "ar",
+        "x-agent-device": "NativeApp",
+        "x-agent-version": "2024.7.2.1",
+        "x-agent-build": "1050",
+        "digitalId": "DynamicApp",
+        "Accept": "application/json",
         "Content-Type": "application/json",
         "api-host": "ProductOrderingManagement",
         "useCase": "CashFakkaAndMared",
         "api-version": "v2",
         "msisdn": "{sender}",
-        "Authorization": "Bearer {access_token}",
-        "x-agent-operatingsystem": "13",
-        "clientId": "AnaVodafoneAndroid",
-        "Accept-Language": "ar",
-        "x-agent-device": "OPPO CPH2235",
-        "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "24S0M31T0I9RK"
+        "Authorization": "Bearer {access_token}"
       },
-      "body": {
-        "channel": {"name": "MobileApp"},
-        "orderItem": [{
-          "action": "insert",
-          "id": "{productId}",
-          "product": {
-            "characteristic": [
-              {"name": "PaymentMethod", "value": "VFCash"},
-              {"name": "USE_EMONEY", "value": "False"},
-              {"name": "MerchantCode", "value": "81841829"}
-            ],
-            "id": "{productId}",
-            "relatedParty": [
-              {"id": "{sender_no_zero}", "name": "MSISDN", "role": "Subscriber"},
-              {"id": "{receiver}", "name": "Receiver", "role": "Receiver"}
-            ]
-          },
-          "@type": "{productId}",
-          "eCode": 0
-        }],
-        "relatedParty": [
-          {"id": "{pin}", "name": "pin", "role": "Requestor"}
-        ],
-        "@type": "CashFakkaAndMared"
+      "bodyTemplate": "{\"channel\":{\"name\":\"MobileApp\"},\"orderItem\":[{\"action\":\"insert\",\"id\":\"PRODUCT_ID\",\"product\":{\"characteristic\":[{\"name\":\"PaymentMethod\",\"value\":\"VFCash\"},{\"name\":\"USE_EMONEY\",\"value\":\"False\"},{\"name\":\"MerchantCode\",\"value\":\"81841829\"}],\"id\":\"PRODUCT_ID\",\"relatedParty\":[{\"id\":\"SENDER_WITHOUT_ZERO\",\"name\":\"MSISDN\",\"role\":\"Subscriber\"},{\"id\":\"RECEIVER\",\"name\":\"Receiver\",\"role\":\"Receiver\"}]},\"@type\":\"PRODUCT_ID\",\"eCode\":0}],\"relatedParty\":[{\"id\":\"PIN\",\"name\":\"pin\",\"role\":\"Requestor\"}],\"@type\":\"CashFakkaAndMared\"}",
+      "placeholders": {
+        "PRODUCT_ID": "{productId}",
+        "SENDER_WITHOUT_ZERO": "{sender_no_zero}",
+        "RECEIVER": "{receiver}",
+        "PIN": "{pin}"
       },
       "extract": {
         "from": "json",
-        "key": "orderId"
+        "key": "state",
+        "deepSearch": true
       },
-      "saveAs": "orderId",
+      "saveAs": "orderState",
       "error": "reason",
       "httpSuccess": [200],
-      "success": "state == 'Completed' && orderId != null && orderId != ''"
+      "successCondition": "state == 'Completed' || complete == true"
     }
   ]
 }
