@@ -4,43 +4,41 @@
       "method": "GET",
       "url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
       "headers": {
-        "User-Agent": "okhttp/4.11.0",
+        "User-Agent": "{device_user_agent}",
         "Connection": "Keep-Alive",
         "Accept-Encoding": "gzip",
-        "x-agent-operatingsystem": "13",
+        "x-agent-operatingsystem": "{os_version}",
         "clientId": "AnaVodafoneAndroid",
         "Accept-Language": "ar",
-        "x-agent-device": "OPPO CPH2235",
-        "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "24S0M31T0I9RK"
+        "x-agent-device": "{device_model}",
+        "x-agent-version": "{app_version}",
+        "x-agent-build": "{app_build}",
+        "digitalId": "{device_digital_id}"
       },
       "extract": {
         "from": "json",
         "key": "seamlessToken"
       },
       "saveAs": "seamlessToken",
-      "error": "فشل تسجيل الدخول",
-      "logFullResponse": true,
-      "logHeaders": true
+      "error": "فشل تسجيل الدخول"
     },
     {
       "method": "POST",
       "url": "https://mobile.vodafone.com.eg/auth/realms/vf-realm/protocol/openid-connect/token",
       "headers": {
-        "User-Agent": "okhttp/4.11.0",
+        "User-Agent": "{device_user_agent}",
         "Accept": "application/json, text/plain, */*",
         "Accept-Encoding": "gzip",
         "silentLogin": "true",
         "seamlessToken": "{seamlessToken}",
         "firstTimeLogin": "true",
-        "x-agent-operatingsystem": "13",
+        "x-agent-operatingsystem": "{os_version}",
         "clientId": "AnaVodafoneAndroid",
         "Accept-Language": "ar",
-        "x-agent-device": "OPPO CPH2235",
-        "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "24S0M31T0I9RK",
+        "x-agent-device": "{device_model}",
+        "x-agent-version": "{app_version}",
+        "x-agent-build": "{app_build}",
+        "digitalId": "{device_digital_id}",
         "Content-Type": "application/x-www-form-urlencoded"
       },
       "bodyType": "urlencoded",
@@ -50,15 +48,13 @@
         "key": "access_token"
       },
       "saveAs": "access_token",
-      "error": "فشل الحصول على التوكن",
-      "logFullResponse": true,
-      "logHeaders": true
+      "error": "فشل الحصول على التوكن"
     },
     {
       "method": "POST",
       "url": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
       "headers": {
-        "User-Agent": "okhttp/4.11.0",
+        "User-Agent": "{device_user_agent}",
         "Connection": "Keep-Alive",
         "Accept": "application/json",
         "Accept-Encoding": "gzip",
@@ -68,13 +64,13 @@
         "api-version": "v2",
         "msisdn": "{sender}",
         "Authorization": "Bearer {access_token}",
-        "x-agent-operatingsystem": "13",
+        "x-agent-operatingsystem": "{os_version}",
         "clientId": "AnaVodafoneAndroid",
         "Accept-Language": "ar",
-        "x-agent-device": "OPPO CPH2235",
-        "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "24S0M31T0I9RK"
+        "x-agent-device": "{device_model}",
+        "x-agent-version": "{app_version}",
+        "x-agent-build": "{app_build}",
+        "digitalId": "{device_digital_id}"
       },
       "body": {
         "channel": {"name": "MobileApp"},
@@ -109,9 +105,7 @@
       },
       "saveAs": "orderState",
       "error": "reason",
-      "successCondition": "state == 'Completed' || complete == true",
-      "logFullResponse": true,
-      "logHeaders": true
+      "successCondition": "state == 'Completed' || complete == true"
     }
   ]
 }
