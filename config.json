@@ -2,7 +2,7 @@
   "steps": [
     {
       "method": "GET",
-      "url": "https://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
+      "url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
       "injectHeaders": {
         "User-Agent": "okhttp/4.11.0",
         "Connection": "Keep-Alive",
@@ -16,7 +16,7 @@
         "digitalId": "24S0M31T0I9RK"
       },
       "extractKey": "seamlessToken",
-      "errorKey": "فشل تسجيل الدخول تأكد إن الشبكة فودافون"
+      "errorKey": "فشل تسجيل الدخول — تأكد إن الشبكة فودافون"
     },
     {
       "method": "POST",
@@ -28,10 +28,19 @@
         "client_id": "cash-app"
       },
       "injectHeaders": {
+        "User-Agent": "okhttp/4.11.0",
         "Accept": "application/json, text/plain, */*",
+        "Accept-Encoding": "gzip",
         "silentLogin": "true",
         "seamlessToken": "{seamlessToken}",
-        "firstTimeLogin": "true"
+        "firstTimeLogin": "true",
+        "x-agent-operatingsystem": "13",
+        "clientId": "AnaVodafoneAndroid",
+        "Accept-Language": "ar",
+        "x-agent-device": "OPPO CPH2235",
+        "x-agent-version": "2024.7.2.1",
+        "x-agent-build": "1050",
+        "digitalId": "24S0M31T0I9RK"
       },
       "extractKey": "access_token",
       "errorKey": "فشل الحصول على التوكن"
@@ -53,7 +62,7 @@
             ],
             "id": "{productId}",
             "relatedParty": [
-              {"id": "{sender_raw}", "name": "MSISDN", "role": "Subscriber"},
+              {"id": "{sender_no_zero}", "name": "MSISDN", "role": "Subscriber"},
               {"id": "{receiver}", "name": "Receiver", "role": "Receiver"}
             ]
           },
@@ -66,13 +75,23 @@
         "@type": "CashFakkaAndMared"
       },
       "injectHeaders": {
+        "User-Agent": "okhttp/4.11.0",
+        "Connection": "Keep-Alive",
         "Accept": "application/json",
+        "Accept-Encoding": "gzip",
         "Content-Type": "application/json",
         "api-host": "ProductOrderingManagement",
         "useCase": "CashFakkaAndMared",
         "api-version": "v2",
         "msisdn": "{sender}",
-        "Authorization": "Bearer {access_token}"
+        "Authorization": "Bearer {access_token}",
+        "x-agent-operatingsystem": "13",
+        "clientId": "AnaVodafoneAndroid",
+        "Accept-Language": "ar",
+        "x-agent-device": "OPPO CPH2235",
+        "x-agent-version": "2024.7.2.1",
+        "x-agent-build": "1050",
+        "digitalId": "24S0M31T0I9RK"
       },
       "successCondition": "state == 'Completed' || complete == true",
       "errorKey": "reason"
