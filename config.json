@@ -45,12 +45,20 @@
       },
       "bodyType": "urlencoded",
       "body": "grant_type=password&client_secret=b86e30a8-ae29-467a-a71f-65c73f2ff5e3&client_id=cash-app",
-      "extract": {
-        "from": "json",
-        "key": "access_token",
-        "deepSearch": true
-      },
-      "saveAs": "access_token",
+      "extract": [
+        {
+          "from": "json",
+          "key": "access_token",
+          "deepSearch": true,
+          "saveAs": "access_token"
+        },
+        {
+          "from": "json",
+          "key": "refresh_token",
+          "deepSearch": true,
+          "saveAs": "refresh_token"
+        }
+      ],
       "error": "فشل الحصول على التوكن",
       "httpSuccess": [200]
     },
@@ -74,7 +82,8 @@
         "useCase": "CashFakkaAndMared",
         "api-version": "v2",
         "msisdn": "{sender}",
-        "Authorization": "Bearer {access_token}"
+        "Authorization": "Bearer {access_token}",
+        "Refresh-Token": "{refresh_token}"
       },
       "body": {
         "channel": {"name": "MobileApp"},
