@@ -84,15 +84,31 @@
         "RECEIVER": "{receiver}",
         "PIN": "{pin}"
       },
-      "extract": {
-        "from": "json",
-        "key": "state",
-        "deepSearch": true
-      },
-      "saveAs": "orderState",
+      "extract": [
+        {
+          "from": "json",
+          "key": "state",
+          "deepSearch": true,
+          "saveAs": "orderState"
+        },
+        {
+          "from": "json",
+          "key": "orderId",
+          "deepSearch": true,
+          "saveAs": "orderId",
+          "required": true
+        },
+        {
+          "from": "json",
+          "key": "transactionId",
+          "deepSearch": true,
+          "saveAs": "transactionId",
+          "required": false
+        }
+      ],
       "error": "reason",
       "httpSuccess": [200],
-      "successCondition": "state == 'Completed' || complete == true"
+      "successCondition": "(state == 'Completed' || complete == true) && orderId != null && orderId != '' && orderId != 'null'"
     }
   ]
 }
