@@ -4,16 +4,11 @@
       "method": "GET",
       "url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
       "headers": {
-        "User-Agent": "okhttp/4.11.0",
-        "Connection": "Keep-Alive",
-        "Accept-Encoding": "gzip",
-        "x-agent-operatingsystem": "13",
-        "clientId": "AnaVodafoneAndroid",
-        "Accept-Language": "ar",
-        "x-agent-device": "NativeApp",
-        "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "DynamicApp"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "ar,en;q=0.9",
+        "Connection": "keep-alive"
       },
       "extract": {
         "from": "json",
@@ -22,43 +17,27 @@
       },
       "saveAs": "seamlessToken",
       "error": "فشل تسجيل الدخول",
-      "httpSuccess": [200]
+      "httpSuccess": [200, 302]
     },
     {
       "method": "POST",
       "url": "https://mobile.vodafone.com.eg/auth/realms/vf-realm/protocol/openid-connect/token",
       "headers": {
-        "User-Agent": "okhttp/4.11.0",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "application/json, text/plain, */*",
-        "Accept-Encoding": "gzip",
-        "silentLogin": "true",
-        "seamlessToken": "{seamlessToken}",
-        "firstTimeLogin": "true",
-        "x-agent-operatingsystem": "13",
-        "clientId": "AnaVodafoneAndroid",
-        "Accept-Language": "ar",
-        "x-agent-device": "NativeApp",
-        "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "DynamicApp",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "ar,en;q=0.9",
+        "Connection": "keep-alive",
         "Content-Type": "application/x-www-form-urlencoded"
       },
       "bodyType": "urlencoded",
       "body": "grant_type=password&client_secret=b86e30a8-ae29-467a-a71f-65c73f2ff5e3&client_id=cash-app",
-      "extract": [
-        {
-          "from": "json",
-          "key": "access_token",
-          "deepSearch": true,
-          "saveAs": "access_token"
-        },
-        {
-          "from": "json",
-          "key": "refresh_token",
-          "deepSearch": true,
-          "saveAs": "refresh_token"
-        }
-      ],
+      "extract": {
+        "from": "json",
+        "key": "access_token",
+        "deepSearch": true
+      },
+      "saveAs": "access_token",
       "error": "فشل الحصول على التوكن",
       "httpSuccess": [200]
     },
@@ -66,24 +45,17 @@
       "method": "POST",
       "url": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
       "headers": {
-        "User-Agent": "okhttp/4.11.0",
-        "Connection": "Keep-Alive",
-        "Accept": "application/json",
-        "Accept-Encoding": "gzip",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "ar,en;q=0.9",
+        "Connection": "keep-alive",
         "Content-Type": "application/json",
-        "x-agent-operatingsystem": "13",
-        "clientId": "AnaVodafoneAndroid",
-        "Accept-Language": "ar",
-        "x-agent-device": "NativeApp",
-        "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "DynamicApp",
         "api-host": "ProductOrderingManagement",
         "useCase": "CashFakkaAndMared",
         "api-version": "v2",
         "msisdn": "{sender}",
-        "Authorization": "Bearer {access_token}",
-        "Refresh-Token": "{refresh_token}"
+        "Authorization": "Bearer {access_token}"
       },
       "body": {
         "channel": {"name": "MobileApp"},
