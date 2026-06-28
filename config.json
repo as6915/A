@@ -1,8 +1,7 @@
 {
   "session": {
     "enabled": true,
-    "persistCookies": true,
-    "clearOnFinish": false
+    "persistCookies": true
   },
   "steps": [
     {
@@ -47,11 +46,7 @@
         "Content-Type": "application/x-www-form-urlencoded"
       },
       "bodyType": "urlencoded",
-      "body": {
-        "grant_type": "password",
-        "client_secret": "b86e30a8-ae29-467a-a71f-65c73f2ff5e3",
-        "client_id": "cash-app"
-      },
+      "body": "grant_type=password&client_secret=b86e30a8-ae29-467a-a71f-65c73f2ff5e3&client_id=cash-app",
       "extract": {
         "from": "json",
         "key": "access_token"
@@ -81,33 +76,7 @@
         "x-agent-build": "1050",
         "digitalId": "24S0M31T0I9RK"
       },
-      "body": {
-        "channel": {"name": "MobileApp"},
-        "orderItem": [
-          {
-            "action": "insert",
-            "id": "{productId}",
-            "product": {
-              "characteristic": [
-                {"name": "PaymentMethod", "value": "VFCash"},
-                {"name": "USE_EMONEY", "value": "False"},
-                {"name": "MerchantCode", "value": "81841829"}
-              ],
-              "id": "{productId}",
-              "relatedParty": [
-                {"id": "{sender_no_zero}", "name": "MSISDN", "role": "Subscriber"},
-                {"id": "{receiver}", "name": "Receiver", "role": "Receiver"}
-              ]
-            },
-            "@type": "{productId}",
-            "eCode": 0
-          }
-        ],
-        "relatedParty": [
-          {"id": "{pin}", "name": "pin", "role": "Requestor"}
-        ],
-        "@type": "CashFakkaAndMared"
-      },
+      "body": "{\"channel\":{\"name\":\"MobileApp\"},\"orderItem\":[{\"action\":\"insert\",\"id\":\"{productId}\",\"product\":{\"characteristic\":[{\"name\":\"PaymentMethod\",\"value\":\"VFCash\"},{\"name\":\"USE_EMONEY\",\"value\":\"False\"},{\"name\":\"MerchantCode\",\"value\":\"81841829\"}],\"id\":\"{productId}\",\"relatedParty\":[{\"id\":\"{sender_no_zero}\",\"name\":\"MSISDN\",\"role\":\"Subscriber\"},{\"id\":\"{receiver}\",\"name\":\"Receiver\",\"role\":\"Receiver\"}]},\"@type\":\"{productId}\",\"eCode\":0}],\"relatedParty\":[{\"id\":\"{pin}\",\"name\":\"pin\",\"role\":\"Requestor\"}],\"@type\":\"CashFakkaAndMared\"}",
       "extract": {
         "from": "json",
         "key": "state"
