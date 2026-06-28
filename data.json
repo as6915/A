@@ -1,5 +1,10 @@
 {
-  "users": {},
+  "users": {
+    "01028085788": {
+      "points": 60,
+      "name": "Alakreb"
+    }
+  },
   "admins": {
     "Abdo": "MDe%eVySK:r0"
   }
