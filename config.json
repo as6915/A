@@ -1,9 +1,7 @@
 {
   "session": {
     "enabled": true,
-    "persistCookies": true,
-    "saveTokens": true,
-    "clearOnSuccess": true
+    "persistCookies": true
   },
   "steps": [
     {
