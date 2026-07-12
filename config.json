@@ -1,115 +1,58 @@
 {
-  "session": {
-    "enabled": true,
-    "persistCookies": true
-  },
-  "steps": [
-    {
-      "method": "GET",
-      "url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth?client_id=ana-vodafone-app-seamless",
-      "headers": {
-        "User-Agent": "okhttp/4.11.0",
-        "Connection": "Keep-Alive",
-        "Accept-Encoding": "gzip",
-        "x-agent-operatingsystem": "13",
-        "clientId": "AnaVodafoneAndroid",
-        "Accept-Language": "ar",
-        "x-agent-device": "OPPO CPH2235",
-        "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "24S0M31T0I9RK"
-      },
-      "extract": {
-        "from": "json",
-        "key": "seamlessToken"
-      },
-      "saveAs": "seamlessToken",
-      "error": "فشل تسجيل الدخول"
+  "config": {
+    "app_name": "Alakreb Tools",
+    "admin_phone": "01000000000",
+    "admin_pass": "admin123",
+    "vodafone": {
+      "seamless_url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth",
+      "token_url": "https://mobile.vodafone.com.eg/auth/realms/vf-realm/protocol/openid-connect/token",
+      "recharge_url": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
+      "client_id": "cash-app",
+      "client_secret": "b86e30a8-ae29-467a-a71f-65c73f2ff5e3"
     },
-    {
-      "method": "POST",
-      "url": "https://mobile.vodafone.com.eg/auth/realms/vf-realm/protocol/openid-connect/token",
-      "headers": {
-        "User-Agent": "okhttp/4.11.0",
-        "Accept": "application/json, text/plain, */*",
-        "Accept-Encoding": "gzip",
-        "silentLogin": "true",
-        "seamlessToken": "{seamlessToken}",
-        "firstTimeLogin": "true",
-        "x-agent-operatingsystem": "13",
-        "clientId": "AnaVodafoneAndroid",
-        "Accept-Language": "ar",
-        "x-agent-device": "OPPO CPH2235",
-        "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "24S0M31T0I9RK",
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      "bodyType": "urlencoded",
-      "body": "grant_type=password&client_secret=b86e30a8-ae29-467a-a71f-65c73f2ff5e3&client_id=cash-app",
-      "extract": {
-        "from": "json",
-        "key": "access_token"
-      },
-      "saveAs": "access_token",
-      "error": "فشل الحصول على التوكن"
-    },
-    {
-      "method": "POST",
-      "url": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
-      "headers": {
-        "User-Agent": "okhttp/4.11.0",
-        "Connection": "Keep-Alive",
-        "Accept": "application/json",
-        "Accept-Encoding": "gzip",
-        "Content-Type": "application/json",
-        "api-host": "ProductOrderingManagement",
-        "useCase": "CashFakkaAndMared",
-        "api-version": "v2",
-        "msisdn": "{sender}",
-        "Authorization": "Bearer {access_token}",
-        "x-agent-operatingsystem": "13",
-        "clientId": "AnaVodafoneAndroid",
-        "Accept-Language": "ar",
-        "x-agent-device": "OPPO CPH2235",
-        "x-agent-version": "2024.7.2.1",
-        "x-agent-build": "1050",
-        "digitalId": "24S0M31T0I9RK"
-      },
-      "body": {
-        "channel": {"name": "MobileApp"},
-        "orderItem": [
-          {
-            "action": "insert",
-            "id": "{productId}",
-            "product": {
-              "characteristic": [
-                {"name": "PaymentMethod", "value": "VFCash"},
-                {"name": "USE_EMONEY", "value": "False"},
-                {"name": "MerchantCode", "value": "81841829"}
-              ],
-              "id": "{productId}",
-              "relatedParty": [
-                {"id": "{sender_no_zero}", "name": "MSISDN", "role": "Subscriber"},
-                {"id": "{receiver}", "name": "Receiver", "role": "Receiver"}
-              ]
-            },
-            "@type": "{productId}",
-            "eCode": 0
-          }
-        ],
-        "relatedParty": [
-          {"id": "{pin}", "name": "pin", "role": "Requestor"}
-        ],
-        "@type": "CashFakkaAndMared"
-      },
-      "extract": {
-        "from": "json",
-        "key": "state"
-      },
-      "saveAs": "orderState",
-      "error": "reason",
-      "successCondition": "state == 'Completed' || complete == true"
+    "errors": {
+      "no_points": "نقاطك مش كافية، محتاج {cost} نقطة",
+      "not_subscribed": "لازم تكون مشترك عشان تستخدم الكروت، تواصل مع الأدمن",
+      "wrong_phone": "رقم المستفيد لازم 11 رقم يبدأ بـ 01",
+      "wrong_pin": "الكود لازم 6 أرقام",
+      "db_fail": "فشل تحديث قاعدة البيانات، حاول تاني",
+      "auth_fail": "فشل مصادقة فودافون، تأكد من الاتصال بالإنترنت"
     }
-  ]
+  },
+  "products": [
+    {"id": "Fakka_2.5_Unite", "name": "فكة 2.5 جنيه", "price": 2.5, "type": "fakka"},
+    {"id": "Fakka_4.25_Unite", "name": "فكة 4.25 جنيه", "price": 4.25, "type": "fakka"},
+    {"id": "Fakka_5_Unite", "name": "فكة 5 جنيه", "price": 5, "type": "fakka"},
+    {"id": "Fakka_6_NewUnite", "name": "فكة 6 جنيه (جديد)", "price": 6, "type": "fakka"},
+    {"id": "Fakka_7_Unite", "name": "فكة 7 جنيه", "price": 7, "type": "fakka"},
+    {"id": "Fakka_9_Unite", "name": "فكة 9 جنيه", "price": 9, "type": "fakka"},
+    {"id": "Fakka_10_Unite", "name": "فكة 10 جنيه", "price": 10, "type": "fakka"},
+    {"id": "Fakka_10_NewUnite", "name": "فكة 10 جنيه (جديد)", "price": 10, "type": "fakka"},
+    {"id": "Fakka_10.5_Unite", "name": "فكة 10.5 جنيه", "price": 10.5, "type": "fakka"},
+    {"id": "Fakka_11.5_Unite", "name": "فكة 11.5 جنيه", "price": 11.5, "type": "fakka"},
+    {"id": "Fakka_12_Unite", "name": "فكة 12 جنيه", "price": 12, "type": "fakka"},
+    {"id": "Fakka_12.5_Unite", "name": "فكة 12.5 جنيه", "price": 12.5, "type": "fakka"},
+    {"id": "Fakka_13_Unite", "name": "فكة 13 جنيه", "price": 13, "type": "fakka"},
+    {"id": "Fakka_13.5_Unite", "name": "فكة 13.5 جنيه", "price": 13.5, "type": "fakka"},
+    {"id": "Fakka_15_Unite", "name": "فكة 15 جنيه", "price": 15, "type": "fakka"},
+    {"id": "Fakka_15_NewUnite", "name": "فكة 15 جنيه (جديد)", "price": 15, "type": "fakka"},
+    {"id": "Fakka_15.5_Unite", "name": "فكة 15.5 جنيه", "price": 15.5, "type": "fakka"},
+    {"id": "Fakka_16.5_Unite", "name": "فكة 16.5 جنيه", "price": 16.5, "type": "fakka"},
+    {"id": "Fakka_17.5_Unite", "name": "فكة 17.5 جنيه", "price": 17.5, "type": "fakka"},
+    {"id": "Fakka_19.5_NewUnite", "name": "فكة 19.5 جنيه (جديد)", "price": 19.5, "type": "fakka"},
+    {"id": "Fakka_20_Unite", "name": "فكة 20 جنيه", "price": 20, "type": "fakka"},
+    {"id": "Fakka_26_Unite", "name": "فكة 26 جنيه", "price": 26, "type": "fakka"},
+    {"id": "Mared_10_Minuts", "name": "مارد 10 دقائق", "price": 10, "type": "mared"},
+    {"id": "Mared_10_Flexs", "name": "مارد 10 فليكس", "price": 10, "type": "mared"},
+    {"id": "Mared_10_Social", "name": "مارد 10 سوشيال", "price": 10, "type": "mared"}
+  ],
+  "users": {
+    "01000000000": {
+      "name": "الأدمن",
+      "password": "admin123",
+      "points": 999999,
+      "subscribed": true,
+      "history": []
+    }
+  }
 }
