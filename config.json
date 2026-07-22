@@ -1,87 +1,398 @@
 {
-  "config": {
-    "app_name": "Alakreb Tools",
+  "app": {
+    "name": "Alakreb Tools",
     "version": "1.0.0",
-    "admin_phone": "01000000000",
-    "admin_pass": "admin123",
-    "theme": {
-      "primary": "#00E5FF",
-      "secondary": "#6200EA",
-      "background": "#0A0A0A",
-      "surface": "#1A1A2E",
-      "error": "#FF1744",
-      "success": "#00E676"
+    "build": 1,
+    "package": "com.alakreb.tools"
+  },
+  "theme": {
+    "primary": "#00E5FF",
+    "secondary": "#6200EA",
+    "background": "#0A0A0A",
+    "surface": "#1A1A2E",
+    "error": "#FF1744",
+    "success": "#00E676",
+    "warning": "#FF9100",
+    "typography": {
+      "fontFamily": "Cairo",
+      "heading": "h1",
+      "subheading": "h2",
+      "body": "body1",
+      "caption": "caption"
     },
-    "vodafone": {
-      "seamless_url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth",
-      "token_url": "https://mobile.vodafone.com.eg/auth/realms/vf-realm/protocol/openid-connect/token",
-      "recharge_url": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
-      "client_id": "cash-app",
-      "client_secret": "b86e30a8-ae29-467a-a71f-65c73f2ff5e3",
-      "merchant_code": "81841829",
-      "grant_type": "password",
-      "scope": "openid",
-      "token_expiry": 3599
+    "radius": {
+      "small": 8,
+      "medium": 16,
+      "large": 24,
+      "xl": 32
     },
-    "errors": {
-      "no_points": "نقاطك مش كافية، محتاج {cost} نقطة",
-      "not_subscribed": "لازم تكون مشترك عشان تستخدم الكروت، تواصل مع الأدمن",
-      "wrong_phone": "رقم المستفيد لازم 11 رقم يبدأ بـ 01",
-      "wrong_pin": "الكود لازم 6 أرقام",
-      "db_fail": "فشل تحديث قاعدة البيانات، حاول تاني",
-      "auth_fail": "فشل مصادقة فودافون، تأكد من الاتصال بالإنترنت",
-      "seamless_fail": "فشل الحصول على seamless token",
-      "token_fail": "فشل الحصول على access token",
-      "recharge_fail": "فشل عملية الشحن"
+    "blur": {
+      "light": 10,
+      "medium": 20,
+      "heavy": 40
     },
-    "features": {
-      "autoLogin": true,
-      "offlineSupport": true,
-      "languageSupport": ["ar", "en"],
-      "defaultLanguage": "ar",
-      "randomizeHeaders": true,
-      "sslPinning": true
+    "animation": {
+      "speed": 300,
+      "curve": "easeInOut"
     }
   },
-  "categories": [
-    {
-      "id": "fakka",
-      "name": "فكة",
-      "icon": "attach_money",
-      "color": "#00E5FF",
-      "description": "خدمات فكة فودافون"
+  "screens": {
+    "splash": {
+      "duration": 2000,
+      "logo": "scorpion",
+      "background": "gradient",
+      "animation": "fade"
     },
-    {
-      "id": "mared",
-      "name": "مارد",
-      "icon": "bolt",
-      "color": "#FF6B00",
-      "description": "باقات المارد"
+    "auth": {
+      "login": {
+        "title": "تسجيل الدخول",
+        "fields": [
+          {
+            "name": "phone",
+            "label": "رقم الهاتف",
+            "type": "phone",
+            "required": true,
+            "validation": "^(01)[0-9]{9}$"
+          },
+          {
+            "name": "password",
+            "label": "كلمة المرور",
+            "type": "password",
+            "required": true
+          }
+        ],
+        "buttons": [
+          {
+            "text": "تسجيل الدخول",
+            "action": "login",
+            "type": "primary"
+          },
+          {
+            "text": "تسجيل جديد",
+            "action": "register",
+            "type": "secondary"
+          }
+        ],
+        "options": {
+          "rememberMe": true,
+          "forgotPassword": true,
+          "autoLogin": true
+        }
+      },
+      "register": {
+        "title": "إنشاء حساب",
+        "fields": [
+          {
+            "name": "phone",
+            "label": "رقم الهاتف",
+            "type": "phone",
+            "required": true
+          },
+          {
+            "name": "name",
+            "label": "الاسم",
+            "type": "text",
+            "required": true
+          },
+          {
+            "name": "password",
+            "label": "كلمة المرور",
+            "type": "password",
+            "required": true
+          }
+        ]
+      }
+    },
+    "home": {
+      "header": {
+        "greeting": "مرحباً",
+        "showPoints": true,
+        "showAvatar": true
+      },
+      "search": {
+        "enabled": true,
+        "placeholder": "ابحث عن خدمة...",
+        "live": true
+      },
+      "categories": {
+        "display": "grid",
+        "columns": 3,
+        "showAll": true
+      },
+      "cards": {
+        "display": "horizontal",
+        "height": 180,
+        "autoSlide": true,
+        "interval": 3000
+      },
+      "quickActions": [
+        {
+          "id": "recharge",
+          "icon": "phone_android",
+          "label": "شحن",
+          "color": "#00E5FF"
+        },
+        {
+          "id": "balance",
+          "icon": "credit_card",
+          "label": "رصيدي",
+          "color": "#6200EA"
+        },
+        {
+          "id": "history",
+          "icon": "history",
+          "label": "التاريخ",
+          "color": "#FF9100"
+        },
+        {
+          "id": "profile",
+          "icon": "person",
+          "label": "ملفي",
+          "color": "#00E676"
+        }
+      ]
+    },
+    "dashboard": {
+      "admin": {
+        "enabled": true,
+        "stats": {
+          "users": true,
+          "transactions": true,
+          "points": true,
+          "revenue": true
+        },
+        "charts": {
+          "enabled": true,
+          "types": ["bar", "line", "pie"]
+        },
+        "actions": [
+          "manageUsers",
+          "managePoints",
+          "viewLogs",
+          "analytics"
+        ]
+      },
+      "user": {
+        "widgets": [
+          {
+            "id": "points",
+            "type": "card",
+            "title": "النقاط",
+            "icon": "stars"
+          },
+          {
+            "id": "history",
+            "type": "list",
+            "title": "آخر العمليات",
+            "limit": 5
+          },
+          {
+            "id": "favorites",
+            "type": "grid",
+            "title": "المفضلة"
+          }
+        ]
+      }
+    },
+    "profile": {
+      "sections": [
+        {
+          "id": "info",
+          "title": "المعلومات الشخصية",
+          "fields": ["name", "phone", "email"]
+        },
+        {
+          "id": "stats",
+          "title": "الإحصائيات",
+          "fields": ["points", "transactions", "joinedDate"]
+        },
+        {
+          "id": "actions",
+          "title": "الإجراءات",
+          "buttons": ["editProfile", "changePassword", "logout"]
+        }
+      ]
+    },
+    "settings": {
+      "sections": [
+        {
+          "id": "appearance",
+          "title": "المظهر",
+          "items": [
+            {
+              "id": "theme",
+              "type": "select",
+              "label": "السمة",
+              "options": ["فاتح", "داكن", "تلقائي"]
+            },
+            {
+              "id": "language",
+              "type": "select",
+              "label": "اللغة",
+              "options": ["العربية", "English"]
+            }
+          ]
+        },
+        {
+          "id": "preferences",
+          "title": "التفضيلات",
+          "items": [
+            {
+              "id": "notifications",
+              "type": "toggle",
+              "label": "الإشعارات"
+            },
+            {
+              "id": "autoLogin",
+              "type": "toggle",
+              "label": "تسجيل الدخول التلقائي"
+            }
+          ]
+        },
+        {
+          "id": "about",
+          "title": "حول التطبيق",
+          "items": [
+            {
+              "id": "version",
+              "type": "info",
+              "label": "الإصدار",
+              "value": "1.0.0"
+            },
+            {
+              "id": "privacy",
+              "type": "link",
+              "label": "سياسة الخصوصية"
+            },
+            {
+              "id": "terms",
+              "type": "link",
+              "label": "شروط الاستخدام"
+            }
+          ]
+        }
+      ]
     }
-  ],
+  },
+  "navigation": {
+    "bottomBar": [
+      {
+        "id": "home",
+        "icon": "home",
+        "label": "الرئيسية",
+        "screen": "home",
+        "enabled": true
+      },
+      {
+        "id": "services",
+        "icon": "apps",
+        "label": "الخدمات",
+        "screen": "services",
+        "enabled": true
+      },
+      {
+        "id": "wallet",
+        "icon": "account_balance_wallet",
+        "label": "المحفظة",
+        "screen": "wallet",
+        "enabled": true,
+        "badge": true
+      },
+      {
+        "id": "history",
+        "icon": "history",
+        "label": "التاريخ",
+        "screen": "history",
+        "enabled": true
+      },
+      {
+        "id": "profile",
+        "icon": "person",
+        "label": "ملفي",
+        "screen": "profile",
+        "enabled": true
+      }
+    ],
+    "drawer": [
+      {
+        "id": "home",
+        "icon": "home",
+        "label": "الرئيسية",
+        "screen": "home"
+      },
+      {
+        "id": "services",
+        "icon": "apps",
+        "label": "جميع الخدمات",
+        "screen": "services"
+      },
+      {
+        "id": "wallet",
+        "icon": "account_balance_wallet",
+        "label": "المحفظة",
+        "screen": "wallet"
+      },
+      {
+        "id": "history",
+        "icon": "history",
+        "label": "سجل العمليات",
+        "screen": "history"
+      },
+      {
+        "id": "favorites",
+        "icon": "favorite",
+        "label": "المفضلة",
+        "screen": "favorites"
+      },
+      {
+        "id": "settings",
+        "icon": "settings",
+        "label": "الإعدادات",
+        "screen": "settings"
+      },
+      {
+        "id": "divider",
+        "type": "divider"
+      },
+      {
+        "id": "share",
+        "icon": "share",
+        "label": "مشاركة التطبيق",
+        "action": "share"
+      },
+      {
+        "id": "logout",
+        "icon": "logout",
+        "label": "تسجيل الخروج",
+        "action": "logout"
+      }
+    ]
+  },
   "services": [
     {
       "id": "vodafone_recharge",
+      "version": 1,
       "name": "شحن فودافون",
       "description": "شحن رصيد فودافون بكروت الفكة وباقات المارد",
       "categoryId": "fakka",
       "icon": "phone_android",
+      "color": "#00E5FF",
       "method": "POST",
       "endpoint": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
-      "headers": {
-        "Content-Type": "application/json; charset=UTF-8",
-        "Accept": "application/json, text/plain, */*",
-        "Accept-Encoding": "gzip",
-        "Accept-Language": "ar",
-        "Connection": "Keep-Alive",
-        "api-host": "ProductOrderingManagement",
-        "useCase": "CashFakkaAndMared",
-        "api-version": "v2",
-        "clientId": "AnaVodafoneAndroid"
-      },
       "auth_required": true,
       "requires_token": true,
-      "parameters": [
+      "points_cost": 1,
+      "requires_subscription": false,
+      "roles": ["User", "Admin"],
+      "overview": "خدمة شحن فودافون تتيح لك شحن رصيد أي رقم فودافون باستخدام نقاطك",
+      "warning": "تأكد من صحة الرقم ووجود نقاط كافية",
+      "instructions": [
+        "اختر نوع الشحن المناسب",
+        "أدخل رقم المستفيد",
+        "أدخل كود فودافون كاش",
+        "اضغط على تأكيد"
+      ],
+      "inputs": [
         {
           "name": "product_id",
           "type": "select",
@@ -126,13 +437,12 @@
         },
         {
           "name": "pin",
-          "type": "string",
+          "type": "password",
           "required": true,
           "label": "كود فودافون كاش",
           "placeholder": "******",
           "validation": "^[0-9]{6}$",
-          "error_message": "الكود يجب أن يكون 6 أرقام",
-          "inputType": "password"
+          "error_message": "الكود يجب أن يكون 6 أرقام"
         }
       ],
       "request_body": {
@@ -166,8 +476,39 @@
         "message": "$.message",
         "orderId": "$.orderId"
       },
-      "pointsCost": 1,
-      "requires_auth": true
+      "cache": {
+        "enabled": false,
+        "ttl": 0
+      },
+      "execution": {
+        "timeout": 30,
+        "retries": 2,
+        "retryDelay": 1000
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": "fakka",
+      "name": "فكة",
+      "icon": "attach_money",
+      "color": "#00E5FF",
+      "description": "خدمات فكة فودافون",
+      "banner": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800",
+      "background": "#0A0A0A",
+      "featured": true,
+      "order": 1
+    },
+    {
+      "id": "mared",
+      "name": "مارد",
+      "icon": "bolt",
+      "color": "#FF6B00",
+      "description": "باقات المارد",
+      "banner": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800",
+      "background": "#0A0A0A",
+      "featured": true,
+      "order": 2
     }
   ],
   "cards": [
@@ -177,11 +518,19 @@
       "title": "شحن فودافون",
       "description": "اشحن رصيدك بسرعة وأمان مع أفضل العروض",
       "icon": "phone_android",
-      "backgroundColor": "#1A1A2E",
+      "background": {
+        "type": "gradient",
+        "colors": ["#1A1A2E", "#00E5FF"],
+        "angle": 45
+      },
       "accentColor": "#00E5FF",
       "serviceId": "vodafone_recharge",
       "badge": "الأكثر استخداماً",
-      "stats": "500+ عملية شحن"
+      "stats": "500+ عملية شحن",
+      "animation": "slideUp",
+      "priority": 1,
+      "visibility": "public",
+      "order": 1
     },
     {
       "id": "mared_card",
@@ -189,11 +538,19 @@
       "title": "باقات المارد",
       "description": "دقائق وفليكس وسوشيال بأسعار مميزة",
       "icon": "bolt",
-      "backgroundColor": "#16213E",
+      "background": {
+        "type": "gradient",
+        "colors": ["#16213E", "#FF6B00"],
+        "angle": 135
+      },
       "accentColor": "#FF6B00",
       "serviceId": "vodafone_recharge",
       "badge": "عروض حصرية",
-      "stats": "200+ مشترك"
+      "stats": "200+ مشترك",
+      "animation": "fadeIn",
+      "priority": 2,
+      "visibility": "public",
+      "order": 2
     }
   ],
   "auth_flow": {
@@ -246,6 +603,7 @@
     }
   },
   "headers_config": {
+    "randomize": true,
     "devices": [
       "Samsung SM-A165F",
       "Samsung SM-A515F",
@@ -262,5 +620,91 @@
     "app_versions": ["2025.11.1", "2025.10.1", "2025.09.1"],
     "app_builds": ["1063", "1062", "1061"],
     "device_ids": []
+  },
+  "permissions": {
+    "roles": {
+      "Admin": {
+        "level": 0,
+        "permissions": ["all"]
+      },
+      "Moderator": {
+        "level": 1,
+        "permissions": ["view_users", "edit_points"]
+      },
+      "VIP": {
+        "level": 2,
+        "permissions": ["priority_support", "bonus_points"]
+      },
+      "User": {
+        "level": 3,
+        "permissions": ["recharge", "view_history"]
+      }
+    }
+  },
+  "features": {
+    "autoLogin": true,
+    "offlineSupport": true,
+    "languages": ["ar", "en"],
+    "defaultLanguage": "ar",
+    "randomizeHeaders": true,
+    "sslPinning": true,
+    "enableWallet": true,
+    "enableHistory": true,
+    "enableNotifications": true,
+    "enableSearch": true,
+    "enableProfile": true,
+    "enableDarkMode": true,
+    "enableFavorites": true,
+    "enableAnalytics": true,
+    "enablePushNotifications": false
+  },
+  "cache": {
+    "enabled": true,
+    "ttl": 3600,
+    "refresh_on_start": true,
+    "sync_interval": 300
+  },
+  "localization": {
+    "ar": {
+      "app_name": "العقرب تولز",
+      "greeting": "مرحباً",
+      "points": "نقاط",
+      "recharge": "شحن",
+      "history": "التاريخ",
+      "profile": "ملفي",
+      "settings": "الإعدادات"
+    },
+    "en": {
+      "app_name": "Alakreb Tools",
+      "greeting": "Welcome",
+      "points": "Points",
+      "recharge": "Recharge",
+      "history": "History",
+      "profile": "Profile",
+      "settings": "Settings"
+    }
+  },
+  "vodafone": {
+    "seamless_url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth",
+    "token_url": "https://mobile.vodafone.com.eg/auth/realms/vf-realm/protocol/openid-connect/token",
+    "recharge_url": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
+    "client_id": "cash-app",
+    "client_secret": "b86e30a8-ae29-467a-a71f-65c73f2ff5e3",
+    "merchant_code": "81841829",
+    "grant_type": "password",
+    "scope": "openid",
+    "token_expiry": 3599
+  },
+  "errors": {
+    "no_points": "نقاطك مش كافية، محتاج {cost} نقطة",
+    "not_subscribed": "لازم تكون مشترك عشان تستخدم الكروت، تواصل مع الأدمن",
+    "wrong_phone": "رقم المستفيد لازم 11 رقم يبدأ بـ 01",
+    "wrong_pin": "الكود لازم 6 أرقام",
+    "db_fail": "فشل تحديث قاعدة البيانات، حاول تاني",
+    "auth_fail": "فشل مصادقة فودافون، تأكد من الاتصال بالإنترنت",
+    "seamless_fail": "فشل الحصول على seamless token",
+    "token_fail": "فشل الحصول على access token",
+    "recharge_fail": "فشل عملية الشحن",
+    "general_error": "حدث خطأ غير متوقع"
   }
-}
+        }
