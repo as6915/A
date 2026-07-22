@@ -1,7 +1,42 @@
-[
-  {
-    "points": 15,
-    "name": "Alakreb",
-    "key": "01028085788"
+{
+  "users": [
+    {
+      "phone": "01000000000",
+      "name": "الأدمن",
+      "password": "admin123",
+      "points": 999999,
+      "role": "Admin",
+      "status": "active",
+      "subscribed": true,
+      "profile": {
+        "fullName": "مدير النظام",
+        "email": "admin@alakreb.com",
+        "avatar": "https://ui-avatars.com/api/?name=Admin&background=00E5FF&color=fff&size=128",
+        "joinedDate": "2024-01-01T00:00:00Z",
+        "lastActive": "2024-01-15T10:30:00Z"
+      },
+      "history": []
+    },
+    {
+      "phone": "01028085788",
+      "name": "Alakreb",
+      "password": "",
+      "points": 15,
+      "role": "User",
+      "status": "active",
+      "subscribed": true,
+      "profile": {
+        "fullName": "Alakreb",
+        "email": "",
+        "avatar": "https://ui-avatars.com/api/?name=Alakreb&background=6200EA&color=fff&size=128",
+        "joinedDate": "2024-01-15T00:00:00Z",
+        "lastActive": "2024-01-15T10:30:00Z"
+      },
+      "history": []
+    }
+  ],
+  "settings": {
+    "maintenance": false,
+    "message": "النظام يعمل بكفاءة"
   }
-]
+}
