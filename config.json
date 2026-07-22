@@ -1,14 +1,27 @@
 {
   "config": {
     "app_name": "Alakreb Tools",
+    "version": "1.0.0",
     "admin_phone": "01000000000",
     "admin_pass": "admin123",
+    "theme": {
+      "primary": "#00E5FF",
+      "secondary": "#6200EA",
+      "background": "#0A0A0A",
+      "surface": "#1A1A2E",
+      "error": "#FF1744",
+      "success": "#00E676"
+    },
     "vodafone": {
       "seamless_url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth",
       "token_url": "https://mobile.vodafone.com.eg/auth/realms/vf-realm/protocol/openid-connect/token",
       "recharge_url": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
       "client_id": "cash-app",
-      "client_secret": "b86e30a8-ae29-467a-a71f-65c73f2ff5e3"
+      "client_secret": "b86e30a8-ae29-467a-a71f-65c73f2ff5e3",
+      "merchant_code": "81841829",
+      "grant_type": "password",
+      "scope": "openid",
+      "token_expiry": 3599
     },
     "errors": {
       "no_points": "نقاطك مش كافية، محتاج {cost} نقطة",
@@ -16,43 +29,238 @@
       "wrong_phone": "رقم المستفيد لازم 11 رقم يبدأ بـ 01",
       "wrong_pin": "الكود لازم 6 أرقام",
       "db_fail": "فشل تحديث قاعدة البيانات، حاول تاني",
-      "auth_fail": "فشل مصادقة فودافون، تأكد من الاتصال بالإنترنت"
+      "auth_fail": "فشل مصادقة فودافون، تأكد من الاتصال بالإنترنت",
+      "seamless_fail": "فشل الحصول على seamless token",
+      "token_fail": "فشل الحصول على access token",
+      "recharge_fail": "فشل عملية الشحن"
+    },
+    "features": {
+      "autoLogin": true,
+      "offlineSupport": true,
+      "languageSupport": ["ar", "en"],
+      "defaultLanguage": "ar",
+      "randomizeHeaders": true,
+      "sslPinning": true
     }
   },
-  "products": [
-    {"id": "Fakka_2.5_Unite", "name": "فكة 2.5 جنيه", "price": 2.5, "type": "fakka"},
-    {"id": "Fakka_4.25_Unite", "name": "فكة 4.25 جنيه", "price": 4.25, "type": "fakka"},
-    {"id": "Fakka_5_Unite", "name": "فكة 5 جنيه", "price": 5, "type": "fakka"},
-    {"id": "Fakka_6_NewUnite", "name": "فكة 6 جنيه (جديد)", "price": 6, "type": "fakka"},
-    {"id": "Fakka_7_Unite", "name": "فكة 7 جنيه", "price": 7, "type": "fakka"},
-    {"id": "Fakka_9_Unite", "name": "فكة 9 جنيه", "price": 9, "type": "fakka"},
-    {"id": "Fakka_10_Unite", "name": "فكة 10 جنيه", "price": 10, "type": "fakka"},
-    {"id": "Fakka_10_NewUnite", "name": "فكة 10 جنيه (جديد)", "price": 10, "type": "fakka"},
-    {"id": "Fakka_10.5_Unite", "name": "فكة 10.5 جنيه", "price": 10.5, "type": "fakka"},
-    {"id": "Fakka_11.5_Unite", "name": "فكة 11.5 جنيه", "price": 11.5, "type": "fakka"},
-    {"id": "Fakka_12_Unite", "name": "فكة 12 جنيه", "price": 12, "type": "fakka"},
-    {"id": "Fakka_12.5_Unite", "name": "فكة 12.5 جنيه", "price": 12.5, "type": "fakka"},
-    {"id": "Fakka_13_Unite", "name": "فكة 13 جنيه", "price": 13, "type": "fakka"},
-    {"id": "Fakka_13.5_Unite", "name": "فكة 13.5 جنيه", "price": 13.5, "type": "fakka"},
-    {"id": "Fakka_15_Unite", "name": "فكة 15 جنيه", "price": 15, "type": "fakka"},
-    {"id": "Fakka_15_NewUnite", "name": "فكة 15 جنيه (جديد)", "price": 15, "type": "fakka"},
-    {"id": "Fakka_15.5_Unite", "name": "فكة 15.5 جنيه", "price": 15.5, "type": "fakka"},
-    {"id": "Fakka_16.5_Unite", "name": "فكة 16.5 جنيه", "price": 16.5, "type": "fakka"},
-    {"id": "Fakka_17.5_Unite", "name": "فكة 17.5 جنيه", "price": 17.5, "type": "fakka"},
-    {"id": "Fakka_19.5_NewUnite", "name": "فكة 19.5 جنيه (جديد)", "price": 19.5, "type": "fakka"},
-    {"id": "Fakka_20_Unite", "name": "فكة 20 جنيه", "price": 20, "type": "fakka"},
-    {"id": "Fakka_26_Unite", "name": "فكة 26 جنيه", "price": 26, "type": "fakka"},
-    {"id": "Mared_10_Minuts", "name": "مارد 10 دقائق", "price": 10, "type": "mared"},
-    {"id": "Mared_10_Flexs", "name": "مارد 10 فليكس", "price": 10, "type": "mared"},
-    {"id": "Mared_10_Social", "name": "مارد 10 سوشيال", "price": 10, "type": "mared"}
-  ],
-  "users": {
-    "01000000000": {
-      "name": "الأدمن",
-      "password": "admin123",
-      "points": 999999,
-      "subscribed": true,
-      "history": []
+  "categories": [
+    {
+      "id": "fakka",
+      "name": "فكة",
+      "icon": "attach_money",
+      "color": "#00E5FF",
+      "description": "خدمات فكة فودافون"
+    },
+    {
+      "id": "mared",
+      "name": "مارد",
+      "icon": "bolt",
+      "color": "#FF6B00",
+      "description": "باقات المارد"
     }
+  ],
+  "services": [
+    {
+      "id": "vodafone_recharge",
+      "name": "شحن فودافون",
+      "description": "شحن رصيد فودافون بكروت الفكة وباقات المارد",
+      "categoryId": "fakka",
+      "icon": "phone_android",
+      "method": "POST",
+      "endpoint": "https://mobile.vodafone.com.eg/services/dxl/pom/productOrder",
+      "headers": {
+        "Content-Type": "application/json; charset=UTF-8",
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Encoding": "gzip",
+        "Accept-Language": "ar",
+        "Connection": "Keep-Alive",
+        "api-host": "ProductOrderingManagement",
+        "useCase": "CashFakkaAndMared",
+        "api-version": "v2",
+        "clientId": "AnaVodafoneAndroid"
+      },
+      "auth_required": true,
+      "requires_token": true,
+      "parameters": [
+        {
+          "name": "product_id",
+          "type": "select",
+          "required": true,
+          "label": "نوع الشحن",
+          "options": [
+            {"value": "Fakka_2.5_Unite", "label": "فكة 2.5 جنيه"},
+            {"value": "Fakka_4.25_Unite", "label": "فكة 4.25 جنيه"},
+            {"value": "Fakka_5_Unite", "label": "فكة 5 جنيه"},
+            {"value": "Fakka_6_NewUnite", "label": "فكة 6 جنيه (جديد)"},
+            {"value": "Fakka_7_Unite", "label": "فكة 7 جنيه"},
+            {"value": "Fakka_9_Unite", "label": "فكة 9 جنيه"},
+            {"value": "Fakka_10_Unite", "label": "فكة 10 جنيه"},
+            {"value": "Fakka_10_NewUnite", "label": "فكة 10 جنيه (جديد)"},
+            {"value": "Fakka_10.5_Unite", "label": "فكة 10.5 جنيه"},
+            {"value": "Fakka_11.5_Unite", "label": "فكة 11.5 جنيه"},
+            {"value": "Fakka_12_Unite", "label": "فكة 12 جنيه"},
+            {"value": "Fakka_12.5_Unite", "label": "فكة 12.5 جنيه"},
+            {"value": "Fakka_13_Unite", "label": "فكة 13 جنيه"},
+            {"value": "Fakka_13.5_Unite", "label": "فكة 13.5 جنيه"},
+            {"value": "Fakka_15_Unite", "label": "فكة 15 جنيه"},
+            {"value": "Fakka_15_NewUnite", "label": "فكة 15 جنيه (جديد)"},
+            {"value": "Fakka_15.5_Unite", "label": "فكة 15.5 جنيه"},
+            {"value": "Fakka_16.5_Unite", "label": "فكة 16.5 جنيه"},
+            {"value": "Fakka_17.5_Unite", "label": "فكة 17.5 جنيه"},
+            {"value": "Fakka_19.5_NewUnite", "label": "فكة 19.5 جنيه (جديد)"},
+            {"value": "Fakka_20_Unite", "label": "فكة 20 جنيه"},
+            {"value": "Fakka_26_Unite", "label": "فكة 26 جنيه"},
+            {"value": "Mared_10_Minuts", "label": "مارد 10 دقائق"},
+            {"value": "Mared_10_Flexs", "label": "مارد 10 فليكس"},
+            {"value": "Mared_10_Social", "label": "مارد 10 سوشيال"}
+          ]
+        },
+        {
+          "name": "receiver",
+          "type": "string",
+          "required": true,
+          "label": "رقم المستفيد",
+          "placeholder": "01xxxxxxxxx",
+          "validation": "^(01)[0-9]{9}$",
+          "error_message": "رقم الهاتف غير صحيح"
+        },
+        {
+          "name": "pin",
+          "type": "string",
+          "required": true,
+          "label": "كود فودافون كاش",
+          "placeholder": "******",
+          "validation": "^[0-9]{6}$",
+          "error_message": "الكود يجب أن يكون 6 أرقام",
+          "inputType": "password"
+        }
+      ],
+      "request_body": {
+        "channel": {"name": "MobileApp"},
+        "orderItem": [
+          {
+            "action": "insert",
+            "id": "{product_id}",
+            "product": {
+              "characteristic": [
+                {"name": "PaymentMethod", "value": "VFCash"},
+                {"name": "USE_EMONEY", "value": "False"},
+                {"name": "MerchantCode", "value": "{merchant_code}"}
+              ],
+              "id": "{product_id}",
+              "relatedParty": [
+                {"id": "{msisdn}", "name": "MSISDN", "role": "Subscriber"},
+                {"id": "{receiver}", "name": "Receiver", "role": "Receiver"}
+              ]
+            },
+            "@type": "{product_id}",
+            "eCode": 0
+          }
+        ],
+        "relatedParty": [{"id": "{pin}", "name": "pin", "role": "Requestor"}],
+        "@type": "CashFakkaAndMared"
+      },
+      "responseMapping": {
+        "success": "$.state == 'Completed'",
+        "state": "$.state",
+        "message": "$.message",
+        "orderId": "$.orderId"
+      },
+      "pointsCost": 1,
+      "requires_auth": true
+    }
+  ],
+  "cards": [
+    {
+      "id": "vodafone_card",
+      "type": "featured",
+      "title": "شحن فودافون",
+      "description": "اشحن رصيدك بسرعة وأمان مع أفضل العروض",
+      "icon": "phone_android",
+      "backgroundColor": "#1A1A2E",
+      "accentColor": "#00E5FF",
+      "serviceId": "vodafone_recharge",
+      "badge": "الأكثر استخداماً",
+      "stats": "500+ عملية شحن"
+    },
+    {
+      "id": "mared_card",
+      "type": "promotion",
+      "title": "باقات المارد",
+      "description": "دقائق وفليكس وسوشيال بأسعار مميزة",
+      "icon": "bolt",
+      "backgroundColor": "#16213E",
+      "accentColor": "#FF6B00",
+      "serviceId": "vodafone_recharge",
+      "badge": "عروض حصرية",
+      "stats": "200+ مشترك"
+    }
+  ],
+  "auth_flow": {
+    "step1": {
+      "url": "http://mobile.vodafone.com.eg/checkSeamless/realms/vf-realm/protocol/openid-connect/auth",
+      "method": "GET",
+      "params": {"client_id": "cash-app"},
+      "headers": {
+        "x-agent-operatingsystem": "{os_version}",
+        "clientId": "AnaVodafoneAndroid",
+        "x-agent-device": "{device_name}",
+        "x-agent-version": "{app_version}",
+        "x-agent-build": "{app_build}",
+        "digitalId": "",
+        "device-id": "{device_id}"
+      },
+      "response": {
+        "seamlessToken": "$.seamlessToken",
+        "msisdn": "$.msisdn"
+      }
+    },
+    "step2": {
+      "url": "https://mobile.vodafone.com.eg/auth/realms/vf-realm/protocol/openid-connect/token",
+      "method": "POST",
+      "body_type": "form",
+      "body": {
+        "grant_type": "password",
+        "client_secret": "{client_secret}",
+        "client_id": "cash-app"
+      },
+      "headers": {
+        "silentLogin": "true",
+        "CRP": "false",
+        "seamlessToken": "{seamless_token}",
+        "firstTimeLogin": "true",
+        "x-agent-operatingsystem": "{os_version}",
+        "clientId": "AnaVodafoneAndroid",
+        "x-agent-device": "{device_name}",
+        "x-agent-version": "{app_version}",
+        "x-agent-build": "{app_build}",
+        "digitalId": "",
+        "device-id": "{device_id}",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "response": {
+        "accessToken": "$.access_token",
+        "expiresIn": "$.expires_in",
+        "tokenType": "$.token_type"
+      }
+    }
+  },
+  "headers_config": {
+    "devices": [
+      "Samsung SM-A165F",
+      "Samsung SM-A515F",
+      "Samsung SM-A715F",
+      "Samsung SM-G990E",
+      "Xiaomi Redmi Note 10",
+      "Xiaomi Redmi 9",
+      "Xiaomi Redmi Note 11",
+      "OnePlus Nord CE",
+      "Realme 8",
+      "Oppo A54"
+    ],
+    "os_versions": ["16", "15", "14", "13"],
+    "app_versions": ["2025.11.1", "2025.10.1", "2025.09.1"],
+    "app_builds": ["1063", "1062", "1061"],
+    "device_ids": []
   }
 }
